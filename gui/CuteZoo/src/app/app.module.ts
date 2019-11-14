@@ -11,21 +11,27 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatMenuModule } from '@angular/material/menu';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { GoogleSignInComponent } from 'angular-google-signin';
 
 import { HomeComponent } from './home/home.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { SignUpGoogleComponent } from './sign-up-google/sign-up-google.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    SignUpComponent
+    SignUpComponent,
+    GoogleSignInComponent,
+    SignUpGoogleComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +47,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     MatNativeDateModule, 
     MatDatepickerModule,
     MatSelectModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatMenuModule
   ],
     providers: [],
   bootstrap: [AppComponent]
