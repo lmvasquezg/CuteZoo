@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import {FormControl, Validators} from '@angular/forms';
 import { UserService } from '../user.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-sign-up',
@@ -10,7 +12,7 @@ import { UserService } from '../user.service';
 })
 export class SignUpComponent implements OnInit {
 
-  constructor(private user: UserService) { }
+  constructor(private user: UserService, private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
   }
@@ -28,7 +30,8 @@ export class SignUpComponent implements OnInit {
   address_control = new FormControl('', [Validators.required]);
   email_control = new FormControl('', [Validators.required, Validators.email]);
   gender_control = new FormControl('', [Validators.required]);
-
+  user_control = new FormControl('', [Validators.required]);
+  psw_control = new FormControl('', [Validators.required]);
 
   name;
   age;
@@ -37,6 +40,8 @@ export class SignUpComponent implements OnInit {
   address;
   email;
   gender;
+  username;
+  password;
 
   getErrorMessage(type: string) {
     switch(type) {
@@ -63,27 +68,54 @@ export class SignUpComponent implements OnInit {
                '';
         break;
       case "gender":
-        return this.gender_control.hasError('required') ? 'Por favor seleccione un opción' : '';
+        return this.gender_control.hasError('required') ? 'Por favor seleccione una opción' : '';
+        break;
+      case "user":
+        return this.user_control.hasError('required') ? 'Por favor seleccione un nombre de usuario' : '';
+        break;
+      case "password":
+        return this.psw_control.hasError('required') ? 'Por favor ingrese una contraseña' : '';
         break;
     }
   }
 
   createUser() {
-    this.name = (document.getElementById('name') as HTMLInputElement).value;
-    this.age = (document.getElementById('age') as HTMLInputElement).value;
-    this.city = (document.getElementById('city') as HTMLInputElement).value;
-    this.country = (document.getElementById('country') as HTMLInputElement).value;
-    this.address = (document.getElementById('address') as HTMLInputElement).value;
-    this.email = (document.getElementById('email')as HTMLInputElement).value;
+    if (this.name_control.invalid || this.age_control.invalid || this.city_control.invalid || this.country_control.invalid || this.address_control.invalid || this.email_control.invalid || this.gender_control.invalid || this.user_control.invalid || this.psw_control.invalid) {
+      if (this.age_control.hasError('min')) {
+        this.openSnackBar("Ingrese una edad valida", "Ok");
+      }
+      else if (this.email_control.hasError('email')) {
+        this.openSnackBar("Ingrese un correo electrónico valido", "Ok")
+      }
+      else{
+        this.openSnackBar("Ingrese todos los datos", "Ok");
+      }
+    }
+    else{
+      this.name = (document.getElementById('name') as HTMLInputElement).value;
+      this.age = (document.getElementById('age') as HTMLInputElement).value;
+      this.city = (document.getElementById('city') as HTMLInputElement).value;
+      this.country = (document.getElementById('country') as HTMLInputElement).value;
+      this.address = (document.getElementById('address') as HTMLInputElement).value;
+      this.email = (document.getElementById('email')as HTMLInputElement).value;
+      this.username = (document.getElementById('username') as HTMLInputElement).value;
+      this.password = (document.getElementById('password') as HTMLInputElement).value;
+  
+      this.user.name = this.name;
+      this.user.age = this.age;
+      this.user.city = this.city;
+      this.user.country = this.country;
+      this.user.address = this.address;
+      this.user.email = this.email;
+      this.user.gender = this.gender;
+      this.user.username = this.username;
+      this.user.password = this.password;
+    }
+  }
 
-    this.user.name = this.name;
-    this.user.age = this.age;
-    this.user.city = this.city;
-    this.user.country = this.country;
-    this.user.address = this.address;
-    this.user.email = this.email;
-    this.user.gender = this.gender;
-
-    console.log(this.user);
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 }

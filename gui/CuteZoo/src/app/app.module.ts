@@ -15,6 +15,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { HomeComponent } from './home/home.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
@@ -39,7 +40,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     ReactiveFormsModule,
     MatNativeDateModule, 
     MatDatepickerModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSnackBarModule
   ],
     providers: [],
   bootstrap: [AppComponent]

@@ -14,6 +14,8 @@ export class UserService {
   address: string;
   email: string;
   gender: string;
+  username: string;
+  password: string;
 
   getName() {
     return this.name;

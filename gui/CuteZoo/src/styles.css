@@ -10,6 +10,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .scrollable {
     overflow: auto;
-    height: max-content; 
+    height: 85%; 
     /* overflow: visible; */
 }

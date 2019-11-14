@@ -37,12 +37,22 @@
         <mat-form-field>
             <mat-label>Género</mat-label>
             <mat-select [formControl]="gender_control" [(value)]=gender required>
-                <mat-option>--</mat-option>
+                <mat-option>--Seleccione una opción--</mat-option>
                 <mat-option *ngFor="let gender of genderOptions" [value]="gender">
                     {{ gender }}
                 </mat-option>
             </mat-select>
             <mat-error *ngIf="gender_control.invalid">{{getErrorMessage("gender")}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput id="username" placeholder="Usuario" [formControl]="user_control" required>
+            <mat-error *ngIf="user_control">{{getErrorMessage("user")}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput id="password" placeholder="Contraseña" type="password" [formControl]="psw_control" required>
+            <mat-error *ngIf="psw_control.invalid">{{getErrorMessage("password")}}</mat-error>
         </mat-form-field>
 
         <button mat-raised-button color="primary" style="width: min-content;" (click)="createUser();">Crear Cuenta</button>
