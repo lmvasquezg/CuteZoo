@@ -115,10 +115,12 @@ export class SignUpComponent implements OnInit {
       this.user.username = this.username;
       this.user.password = this.password;
     }
+
+    this.post(this.name, this.age, this.city, this.country, this.address, this.email, this.gender, this.password, this.username);
   }
 
   post(name, age, city, country, address, email, gender, password, username){
-    const req = this.http.post(`${{API_URL}}/add_user`, {
+    const req = this.http.post(`http://localhost:5000/add_user`, {
       nombre: name,
       edad: age,
       ciudad: city,
