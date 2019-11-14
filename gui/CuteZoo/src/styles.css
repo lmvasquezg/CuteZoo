@@ -2,3 +2,14 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.scrollable {
+    overflow: auto;
+    height: max-content; 
+    /* overflow: visible; */
+}

@@ -1,4 +1,13 @@
-<mat-toolbar style="background-color: rgb(255, 231, 235);" class="toolbar">
-  <button mat-button routerLink="/home"><img width="90" src="/assets/cuteZoo.png"></button>
+<mat-toolbar style="background-color: rgb(255, 231, 235);">
+   
+  <a routerLink="/home"><img width="90" src="/assets/cuteZoo.png"></a>
+  
+  <span class="fill-remaining-space"></span>
+  
+  <div *ngIf="this.router.url == '/home'">
+    <button mat-raised-button style="margin-right: 5%;">Sign in</button>
+    <button mat-raised-button routerLink="/signUp">Sign up</button>
+  </div>
 </mat-toolbar>
-<app-home></app-home>
+
+<router-outlet></router-outlet>  <!-- Show the component according to the current route -->
