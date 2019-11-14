@@ -128,7 +128,7 @@ export class SignUpComponent implements OnInit {
       direccion: address,
       correo: email,
       genero: gender,
-      contraseña: password,
+      contrasena: password,
       usuario: username
     })
     .subscribe(
