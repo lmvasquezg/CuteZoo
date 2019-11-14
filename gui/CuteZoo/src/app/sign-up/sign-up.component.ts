@@ -4,6 +4,10 @@ import {FormControl, Validators} from '@angular/forms';
 import { UserService } from '../user.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
+import { HttpClient } from '@angular/common/http';
+
+import { API_URL } from '../env';
+
 
 @Component({
   selector: 'app-sign-up',
@@ -12,7 +16,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class SignUpComponent implements OnInit {
 
-  constructor(private user: UserService, private _snackBar: MatSnackBar) { }
+  constructor(private http: HttpClient, private user: UserService, private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
   }
@@ -111,6 +115,30 @@ export class SignUpComponent implements OnInit {
       this.user.username = this.username;
       this.user.password = this.password;
     }
+  }
+
+  post(name, age, city, country, address, email, gender, password, username){
+    const req = this.http.post(`${{API_URL}}/add_user`, {
+      nombre: name,
+      edad: age,
+      ciudad: city,
+      pais: country,
+      direccion: address,
+      correo: email,
+      genero: gender,
+      contraseña: password,
+      usuario: username
+    })
+    .subscribe(
+      res => {
+        if (res == "Usuario agregado exitosamente") {
+          console.log("Melo :)");
+        }
+        else{
+          console.log("no tan melo :(");
+        }
+      }
+    )
   }
 
   openSnackBar(message: string, action: string) {

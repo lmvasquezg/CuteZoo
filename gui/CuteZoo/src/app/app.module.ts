@@ -20,6 +20,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { GoogleSignInComponent } from 'angular-google-signin';
 
+import { HttpClientModule } from '@angular/common/http';
+
 import { HomeComponent } from './home/home.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { SignUpGoogleComponent } from './sign-up-google/sign-up-google.component';
@@ -48,7 +50,8 @@ import { SignUpGoogleComponent } from './sign-up-google/sign-up-google.component
     MatDatepickerModule,
     MatSelectModule,
     MatSnackBarModule,
-    MatMenuModule
+    MatMenuModule,
+    HttpClientModule
   ],
     providers: [],
   bootstrap: [AppComponent]
