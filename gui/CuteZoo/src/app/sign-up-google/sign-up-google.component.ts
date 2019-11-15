@@ -3,8 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import {GoogleSignInSuccess} from 'angular-google-signin';
 
 import {FormControl, Validators} from '@angular/forms';
-import { UserService } from '../user.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+
+import { HttpClient } from '@angular/common/http';
+
+import { API_URL } from '../env';
+import { USER } from '../user';
 
 @Component({
   selector: 'app-sign-up-google',
@@ -13,7 +17,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class SignUpGoogleComponent implements OnInit {
 
-  constructor(private user: UserService, private _snackBar: MatSnackBar) { }
+  constructor(private http: HttpClient, private _snackBar: MatSnackBar) { }
   
   ngOnInit() {
   }
@@ -120,18 +124,43 @@ export class SignUpGoogleComponent implements OnInit {
       // this.username = (document.getElementById('username') as HTMLInputElement).value;
       // this.password = (document.getElementById('password') as HTMLInputElement).value;
   
-      this.user.name = this.name;
-      this.user.age = this.age;
-      this.user.city = this.city;
-      this.user.country = this.country;
-      this.user.address = this.address;
-      this.user.email = this.email;
-      this.user.gender = this.gender;
-      this.user.username = this.username;
-      this.user.password = this.password;
+      USER.name = this.name;
+      USER.age = this.age;
+      USER.city = this.city;
+      USER.country = this.country;
+      USER.address = this.address;
+      USER.email = this.email;
+      USER.gender = this.gender;
+      USER.username = this.email;
+      USER.password = '';
 
-      console.log(this.user);
+      this.post(this.name, this.age, this.city, this.country, this.address, this.email, this.gender, '', this.email)
     }
+  }
+
+  post(name, age, city, country, address, email, gender, password, username){
+    const req = this.http.post(`${API_URL}/add_user`, {
+      nombre: name,
+      edad: age,
+      ciudad: city,
+      pais: country,
+      direccion: address,
+      correo: email,
+      genero: gender,
+      contrasena: password,
+      usuario: username
+    })
+    .subscribe(
+      res => {
+        if (res == "Usuario agregado exitosamente") {
+          this.openSnackBar("Usuario creado exitosamente", "OK");
+          window.open('/home', '_self', '', false);
+        }
+        else{
+          this.openSnackBar("Ya existe un usuario asosiado a esta cuenta de Google", "Ok");
+        }
+      }
+    )
   }
 
   openSnackBar(message: string, action: string) {
