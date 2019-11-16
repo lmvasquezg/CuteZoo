@@ -35,7 +35,6 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     // adding an image url dynamically.
     setTimeout(() => {
-      console.log('adding an image url dynamically.');
       this.imageUrls.push('../../assets/slide/6.jpg');
     }, 2000);
 

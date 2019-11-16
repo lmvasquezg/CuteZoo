@@ -105,15 +105,15 @@ export class SignUpComponent implements OnInit {
       this.username = (document.getElementById('username') as HTMLInputElement).value;
       this.password = (document.getElementById('password') as HTMLInputElement).value;
   
-      USER.name = this.name;
-      USER.age = this.age;
-      USER.city = this.city;
-      USER.country = this.country;
-      USER.address = this.address;
-      USER.email = this.email;
-      USER.gender = this.gender;
-      USER.username = this.username;
-      USER.password = this.password;
+      // USER.name = this.name;
+      // USER.age = this.age;
+      // USER.city = this.city;
+      // USER.country = this.country;
+      // USER.address = this.address;
+      // USER.email = this.email;
+      // USER.gender = this.gender;
+      // USER.username = this.username;
+      // USER.password = this.password;
       
       this.post(this.name, this.age, this.city, this.country, this.address, this.email, this.gender, this.password, this.username);
     }

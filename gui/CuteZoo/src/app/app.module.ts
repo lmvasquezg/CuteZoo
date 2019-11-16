@@ -26,6 +26,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { SignUpGoogleComponent } from './sign-up-google/sign-up-google.component';
+import { SignInComponent } from './sign-in/sign-in.component';
+import { ProductsComponent } from './products/products.component';
 
 
 @NgModule({
@@ -34,7 +36,9 @@ import { SignUpGoogleComponent } from './sign-up-google/sign-up-google.component
     HomeComponent,
     SignUpComponent,
     GoogleSignInComponent,
-    SignUpGoogleComponent
+    SignUpGoogleComponent,
+    SignInComponent,
+    ProductsComponent
   ],
   imports: [
     BrowserModule,

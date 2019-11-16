@@ -36,19 +36,19 @@ export class SignUpGoogleComponent implements OnInit {
   // user_control = new FormControl('', [Validators.required]);
   // psw_control = new FormControl('', [Validators.required]);
   
-  name;
-  age;
-  city;
-  country;
-  address;
-  email;
-  gender;
-  username;
-  password;
+  private name;
+  private age;
+  private city;
+  private country;
+  private address;
+  private email;
+  private gender;
+  private username;
+  private password;
 
-  googleUser: gapi.auth2.GoogleUser;
+  private googleUser: gapi.auth2.GoogleUser;
 
-  signedIn = false;
+  private signedIn = false;
 
   private myClientId: string = '543474456477-h48cgal3hvkchoe1449hadshgijvtjkv.apps.googleusercontent.com';
  
@@ -69,10 +69,6 @@ export class SignUpGoogleComponent implements OnInit {
     // console.log('Name: ' + profile.getName());
     // console.log(profile.getEmail());
     // console.log(profile.getImageUrl())
-  }
-
-  cerrar() {
-    this.googleUser.disconnect()
   }
 
   getErrorMessage(type: string) {
@@ -124,15 +120,15 @@ export class SignUpGoogleComponent implements OnInit {
       // this.username = (document.getElementById('username') as HTMLInputElement).value;
       // this.password = (document.getElementById('password') as HTMLInputElement).value;
   
-      USER.name = this.name;
-      USER.age = this.age;
-      USER.city = this.city;
-      USER.country = this.country;
-      USER.address = this.address;
-      USER.email = this.email;
-      USER.gender = this.gender;
-      USER.username = this.email;
-      USER.password = '';
+      // USER.name = this.name;
+      // USER.age = this.age;
+      // USER.city = this.city;
+      // USER.country = this.country;
+      // USER.address = this.address;
+      // USER.email = this.email;
+      // USER.gender = this.gender;
+      // USER.username = this.email;
+      // USER.password = '';
 
       this.post(this.name, this.age, this.city, this.country, this.address, this.email, this.gender, '', this.email)
     }
@@ -154,6 +150,7 @@ export class SignUpGoogleComponent implements OnInit {
       res => {
         if (res == "Usuario agregado exitosamente") {
           this.openSnackBar("Usuario creado exitosamente", "OK");
+          this.googleUser.disconnect();
           window.open('/home', '_self', '', false);
         }
         else{
