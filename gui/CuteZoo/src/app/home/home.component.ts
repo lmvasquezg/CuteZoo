@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  imageUrls:(string)[]=['../../assets/slide/2.jpg', '../../assets/slide/3.jpg', '../../assets/slide/4.jpg', '../../assets/slide/5.jpg', '../../assets/slide/7.jpg'];
+  imageUrls:(string)[]=['../../assets/slide/5.jpg', '../../assets/slide/3.jpg', '../../assets/slide/4.jpg', '../../assets/slide/2.jpg', '../../assets/slide/7.jpg'];
   height: string = '450px';
   minHeight: string;
   arrowSize: string = '30px';
