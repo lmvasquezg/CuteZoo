@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {SlideshowModule} from 'intouch-screensaver';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -51,7 +52,8 @@ import { SignUpGoogleComponent } from './sign-up-google/sign-up-google.component
     MatSelectModule,
     MatSnackBarModule,
     MatMenuModule,
-    HttpClientModule
+    HttpClientModule,
+    SlideshowModule
   ],
     providers: [],
   bootstrap: [AppComponent]

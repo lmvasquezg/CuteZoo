@@ -1,39 +1,31 @@
 <h1 style="text-align: center;">Cute Zoo</h1>
-<p style="text-align: center;">Descripcion....</p>
+<p style="text-align: center;">Cute Zoo es una iniciativa por parte de VaSo Inc. que pretende enviar un mensaje a la comunidad para que aprecie 
+  la belleza de los animales <br>y así sea motivada a cuidar el medio ambiente. Como dice nuestro director ejecutivo Juan Carlos Montoya: <br>"Los humanos somos temporales pero los animales tiernos son para siempre" </p>
 
-<div class="row scrollable">
-    <div class="column">
-      <img src="../../assets/pictures/10.jpg">
-      <img src="../../assets/pictures/40.jpg">
-      <img src="../../assets/pictures/25.jpg">
-      <img src="../../assets/pictures/4.jpg">
-      <img src="../../assets/pictures/1.jpg">
-      <img src="../../assets/pictures/8.jpg">
-      <img src="../../assets/pictures/22.jpg">
-    </div>
-    <div class="column">
-      <img src="../../assets/pictures/32.jpg">
-      <img src="../../assets/pictures/48.jpg">
-      <img src="../../assets/pictures/27.jpg">
-      <img src="../../assets/pictures/29.jpg">
-      <img src="../../assets/pictures/16.jpg">
-      <img src="../../assets/pictures/11.jpg">
-    </div>
-    <div class="column">
-      <img src="../../assets/pictures/4.jpg">
-      <img src="../../assets/pictures/19.jpg">
-      <img src="../../assets/pictures/21.jpg">
-      <img src="../../assets/pictures/34.jpg">
-      <img src="../../assets/pictures/49.jpg">
-      <img src="../../assets/pictures/50.jpg">
-      <img src="../../assets/pictures/31.jpg">
-    </div>
-    <div class="column">
-        <img src="../../assets/pictures/29.jpg">
-        <img src="../../assets/pictures/14.jpg">
-        <img src="../../assets/pictures/5.jpg">
-        <img src="../../assets/pictures/20.jpg">
-        <img src="../../assets/pictures/38.jpg">
-      <img src="../../assets/pictures/42.jpg">
-    </div>
+<div style="margin-bottom:25px">
+
+  <div style="display:block;"
+       [style.width]="width">
+    <slideshow #slideshow
+               [imageUrls]="imageUrls"
+               [height]="height"
+               [minHeight]="minHeight"
+               [arrowSize]="arrowSize"
+               [showArrows]="showArrows"
+               [disableSwiping]="disableSwiping"
+               [autoPlay]="autoPlay"
+               [stopAutoPlayOnSlide]="stopAutoPlayOnSlide"
+               [debug]="debug"
+               [backgroundSize]="backgroundSize"
+               [backgroundPosition]="backgroundPosition"
+               [backgroundRepeat]="backgroundRepeat"
+               [showDots]="showDots"
+               [dotColor]="dotColor"
+               [showCaptions]="showCaptions"
+               [captionColor]="captionColor"
+               [captionBackground]="captionBackground"
+               [lazyLoad]="lazyLoad"
+               [hideOnNoSlides]="hideOnNoSlides">
+    </slideshow>
   </div>
+</div>
