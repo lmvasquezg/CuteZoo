@@ -1,3 +1,7 @@
+import 'hammerjs';
+import 'mousetrap';
+import {GalleryModule} from '@ks89/angular-modal-gallery';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -28,6 +32,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { SignUpGoogleComponent } from './sign-up-google/sign-up-google.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { ProductsComponent } from './products/products.component';
+import { CommentComponent } from './comment/comment.component';
 
 
 @NgModule({
@@ -38,7 +43,8 @@ import { ProductsComponent } from './products/products.component';
     GoogleSignInComponent,
     SignUpGoogleComponent,
     SignInComponent,
-    ProductsComponent
+    ProductsComponent,
+    CommentComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +63,8 @@ import { ProductsComponent } from './products/products.component';
     MatSnackBarModule,
     MatMenuModule,
     HttpClientModule,
-    SlideshowModule
+    SlideshowModule,
+    GalleryModule.forRoot()
   ],
     providers: [],
   bootstrap: [AppComponent]
