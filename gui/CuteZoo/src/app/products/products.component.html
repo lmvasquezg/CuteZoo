@@ -1,9 +1,29 @@
-<p>products works!</p>
+<!doctype html>
+<html lang="en">
 
-<section>
+<head></head>
+
+<body>
+  
+  <p>products works!</p>
+
+  <section>
     <h3>Haga click en el animal que desea ver </h3>
     <br>
-    <ks-modal-gallery [id]="31" [modalImages]="images"
-                    [currentImageConfig]="{downloadable: true}"
-                    [buttonsConfig]="customButtonsConfigExtUrlNewTab"></ks-modal-gallery>
+    <ks-modal-gallery [id]="31" [modalImages]="images" [currentImageConfig]="{downloadable: true}"
+      [buttonsConfig]="customButtonsConfigExtUrlNewTab"></ks-modal-gallery>
   </section>
+  <h4>Sleccione los animales sobre los que desea comentar</h4>
+  <ol>
+    <li><input type="checkbox">Max</li>
+    <li><input type="checkbox">Dog</li>
+    <li><input type="checkbox">Fox</li>
+    <li><input type="checkbox">Bambi</li>
+    <li><input type="checkbox">Elephant</li>
+  </ol>
+
+  <button mat-raised-button onclick="comment()">Comentar</button>
+
+</body>
+
+</html>

@@ -6,6 +6,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { SignUpGoogleComponent } from './sign-up-google/sign-up-google.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { ProductsComponent } from './products/products.component';
+import { CommentComponent } from './comment/comment.component';
   
 
 const routes: Routes = [
@@ -33,6 +34,10 @@ const routes: Routes = [
   {
     path: 'products',
     component: ProductsComponent
+  },
+  {
+    path: 'comment',
+    component: CommentComponent
   }
 ];
 

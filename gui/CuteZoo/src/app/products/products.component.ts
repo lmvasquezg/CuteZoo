@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import {
   AccessibilityConfig,
   Action,
@@ -40,29 +41,38 @@ export class ProductsComponent implements OnInit {
     new Image(
       1,
       { // modal
+        img: '../../assets/pictures/1.jpg',
+        extUrl: 'http://www.google.com',
+        description: 'Max'
+      }
+    ),
+    new Image(
+      2,
+      { // modal
         img: '../../assets/pictures/2.jpg',
         extUrl: 'http://www.google.com',
         description: 'Dog'
       }
     ),
     new Image(
-      2,
+      3,
       { // modal
         img:  '../../assets/pictures/3.jpg',
         description: 'Fox'
       }
     ),
     new Image(
-      3,
+      4,
       { // modal
         img: ' ../../assets/pictures/4.jpg',
         description: 'Bambi'
       }
     ),
     new Image(
-      4,
+      5,
       { // modal
-        img: '../../assets/pictures/5.jpg'
+        img: '../../assets/pictures/5.jpg',
+        description: 'Elephant'
       }
     )
   ];
