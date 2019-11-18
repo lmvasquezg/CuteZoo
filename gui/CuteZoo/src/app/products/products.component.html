@@ -1,28 +1,44 @@
-<!doctype html>
 <html lang="en">
 
-<head></head>
+<head>
+    <meta charset="UTF-8">
+</head>
 
 <body>
-  
-  <p>products works!</p>
+    <h1 class="title">Haga click en el animal que desea ver</h1>
+    <div class="gallery">
+        <div class="card">
+            <img src="../../assets/pictures/1.jpg">
+            <h4>Max</h4>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+            <a href="../comment/comment.component.html">Comentar</a>
+        </div>
+        <div class="card">
+            <img src="../../assets/pictures/2.jpg">
+            <h4>Dog</h4>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+            <a href="#">Comentar</a>
+        </div>
+        <div class="card">
+            <img src="../../assets/pictures/3.jpg">
+            <h4>Fox</h4>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+            <a href="#">Comentar</a>
+        </div>
+        <div class="card">
+            <img src="../../assets/pictures/4.jpg">
+            <h4>Bambi</h4>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+            <a href="#">Comentar</a>
+        </div>
+        <div class="card">
+            <img src="../../assets/pictures/5.jpg">
+            <h4>Elephant</h4>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+            <a href="#">Comentar</a>
+        </div>
+    </div>
 
-  <section>
-    <h3>Haga click en el animal que desea ver </h3>
-    <br>
-    <ks-modal-gallery [id]="31" [modalImages]="images" [currentImageConfig]="{downloadable: true}"
-      [buttonsConfig]="customButtonsConfigExtUrlNewTab"></ks-modal-gallery>
-  </section>
-  <h4>Sleccione los animales sobre los que desea comentar</h4>
-  <ol>
-    <li><input type="checkbox">Max</li>
-    <li><input type="checkbox">Dog</li>
-    <li><input type="checkbox">Fox</li>
-    <li><input type="checkbox">Bambi</li>
-    <li><input type="checkbox">Elephant</li>
-  </ol>
-
-  <button mat-raised-button onclick="comment()">Comentar</button>
 
 </body>
 
