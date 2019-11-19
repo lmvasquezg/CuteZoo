@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
 </head>
 <h2 align="center" >Conoce a nuestros animales</h2>
-<p align="center" >Seleccione los animales de los cuales desea hacer un comentario, posteriormente, <br>cuentenos su famosa opinion que no nos interesa en absoluto :)</p>
+<p align="center" >Seleccione los animales de los cuales desea hacer un comentario</p>
 <textarea mat-input placeholder="Escriba aqui su comentario" class="form-control" id="datos" rows="3" maxlength="150"[(ngModel)]="defaultValue"></textarea>
 <mat-error align="center"*ngIf="(this.selected.length==0)&&(defaultValue!='')">
         No ha seleccionado ningun animal, podria dejar de ser tan estupido y hacerlo? Gracias .l.

@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -7,42 +9,53 @@ export class UserService {
 
   constructor() { }
 
-  name: string;
-  age: Number;
-  city: string;
-  country: string;
-  address: string;
-  email: string;
-  gender: string;
-  username: string;
-  password: string;
+  // name: string;
+  // age: Number;
+  // city: string;
+  // country: string;
+  // address: string;
+  // email: string;
+  // gender: string;
+  // username: string;
+  // password: string;
 
-  getName() {
-    return this.name;
+  private userSource = new BehaviorSubject('Helloo');
+  currentUsername = this.userSource.asObservable();
+
+  setUsername(username: string) {
+    this.userSource.next(username);
   }
 
-  getAge() {
-    return this.age;
-  }
+  // getUsername() {
+  //   return this.username;
+  // }
 
-  getCity() {
-    return this.city;
-  }
+  // getName() {
+  //   return this.name;
+  // }
 
-  getCountry() {
-    return this.country;
-  }
+  // getAge() {
+  //   return this.age;
+  // }
 
-  getAddress() {
-    return this.address;
-  }
+  // getCity() {
+  //   return this.city;
+  // }
 
-  getEmail() {
-    return this.email;
-  }
+  // getCountry() {
+  //   return this.country;
+  // }
 
-  getGender() {
-    return this.gender;
-  }
+  // getAddress() {
+  //   return this.address;
+  // }
+
+  // getEmail() {
+  //   return this.email;
+  // }
+
+  // getGender() {
+  //   return this.gender;
+  // }
 
 }

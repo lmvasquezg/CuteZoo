@@ -4,9 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { AngularWaitBarrier } from 'blocking-proxy/built/lib/angular_wait_barrier';
 
-
-
-
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -50,6 +47,8 @@ export class ProductsComponent implements OnInit {
     this.color='primary'
     this.message='Enviar'
     this.show=false
+    this.animales = new Array();
+
   }
 
   submit(index) {
@@ -64,7 +63,6 @@ export class ProductsComponent implements OnInit {
       let j =this.selected.findIndex(x=>x===index+1)
       this.animales.splice(j,1)
     }
-    
   }
 
 async btnClick(){
@@ -74,13 +72,9 @@ async btnClick(){
    this.color='greenyellow'
    this.message='¡Enviado!'
    this.show=true
-   console.log(this.selected.length)
-   
-
-   
  }
 
- post(comentario, animales){
+ post(comentario, animales: Array<Number>){
   const req = this.http.post(`${API_URL}/add_comment`, {
     usuario: 'default',
     product: [JSON.stringify(animales)],
@@ -113,6 +107,7 @@ openSnackBar(message: string, action: string) {
   this.message='Enviar'
   this.show=false
   this.defaultValue=''
+  this.animales = new Array();
   for(let i =0;i<51;i++){
     this.images[i].cl='card'
   }
