@@ -20,6 +20,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -32,7 +33,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { SignUpGoogleComponent } from './sign-up-google/sign-up-google.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { ProductsComponent } from './products/products.component';
-import { CommentComponent } from './comment/comment.component';
+
 
 
 @NgModule({
@@ -43,8 +44,7 @@ import { CommentComponent } from './comment/comment.component';
     GoogleSignInComponent,
     SignUpGoogleComponent,
     SignInComponent,
-    ProductsComponent,
-    CommentComponent
+    ProductsComponent
   ],
   imports: [
     BrowserModule,

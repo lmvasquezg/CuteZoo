@@ -31,7 +31,7 @@ class AddComment(Resource):
         new_user = {
 
                     "usuario":args["usuario"],
-                    "product":int(args["product"]),
+                    "product":args["product"],
                     "comment":args["comment"],
 
                 }

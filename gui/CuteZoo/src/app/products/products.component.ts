@@ -1,30 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, Inject } from '@angular/core';
+import {API_URL} from '../env'
+import { HttpClient } from '@angular/common/http';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import { AngularWaitBarrier } from 'blocking-proxy/built/lib/angular_wait_barrier';
 
-import {
-  AccessibilityConfig,
-  Action,
-  ButtonEvent,
-  ButtonsConfig,
-  ButtonsStrategy,
-  ButtonType,
-  Description,
-  DescriptionStrategy,
-  DotsConfig,
-  GalleryService,
-  Image,
-  ImageModalEvent,
-  KS_DEFAULT_BTN_CLOSE,
-  KS_DEFAULT_BTN_DELETE,
-  KS_DEFAULT_BTN_DOWNLOAD,
-  KS_DEFAULT_BTN_EXTURL,
-  KS_DEFAULT_BTN_FULL_SCREEN,
-  PreviewConfig,
-  LoadingConfig,
-  LoadingType,
-  CurrentImageConfig
-} from '@ks89/angular-modal-gallery';
 
-import{ CommentComponent } from '../comment/comment.component';
+
 
 @Component({
   selector: 'app-products',
@@ -33,71 +14,116 @@ import{ CommentComponent } from '../comment/comment.component';
 })
 export class ProductsComponent implements OnInit {
 
-  imageIndex = 1;
-  galleryId = 1;
-  isPlaying = true;
+  images:mix[] =[ {cl:'card',url:"../../assets/pictures/1.jpg"},{cl:'card',url:"../../assets/pictures/2.jpg"},
+  {cl:'card',url:"../../assets/pictures/3.jpg"},{cl:'card',url:"../../assets/pictures/4.jpg"},{cl:'card',url:"../../assets/pictures/5.jpg"},
+  {cl:'card',url:"../../assets/pictures/6.jpg"},{cl:'card',url:"../../assets/pictures/7.jpg"},{cl:'card',url:"../../assets/pictures/8.jpg"},
+  {cl:'card',url:"../../assets/pictures/9.jpg"},{cl:'card',url:"../../assets/pictures/10.jpg"},{cl:'card',url:"../../assets/pictures/11.jpg"},
+  {cl:'card',url:"../../assets/pictures/12.jpg"},{cl:'card',url:"../../assets/pictures/13.jpg"},{cl:'card',url:"../../assets/pictures/14.jpg"},
+  {cl:'card',url:"../../assets/pictures/15.png"},{cl:'card',url:"../../assets/pictures/16.jpg"},{cl:'card',url:"../../assets/pictures/17.jpg"},
+  {cl:'card',url:"../../assets/pictures/18.jpg"},{cl:'card',url:"../../assets/pictures/19.jpg"},{cl:'card',url:"../../assets/pictures/20.jpg"},
+  {cl:'card',url:"../../assets/pictures/21.jpg"},{cl:'card',url:"../../assets/pictures/22.jpg"},{cl:'card',url:"../../assets/pictures/23.jpg"},
+  {cl:'card',url:"../../assets/pictures/24.jpg"},{cl:'card',url:"../../assets/pictures/25.jpg"},{cl:'card',url:"../../assets/pictures/26.jpg"},
+  {cl:'card',url:"../../assets/pictures/27.jpg"},{cl:'card',url:"../../assets/pictures/28.jpg"},{cl:'card',url:"../../assets/pictures/29.jpg"},
+  {cl:'card',url:"../../assets/pictures/30.jpg"},{cl:'card',url:"../../assets/pictures/31.jpg"},{cl:'card',url:"../../assets/pictures/32.jpg"},
+  {cl:'card',url:"../../assets/pictures/33.jpg"},{cl:'card',url:"../../assets/pictures/34.jpg"},{cl:'card',url:"../../assets/pictures/35.jpg"},
+ {cl:'card',url:"../../assets/pictures/36.jpg"}, {cl:'card',url:"../../assets/pictures/37.png"},{cl:'card',url:"../../assets/pictures/38.jpg"},
+  {cl:'card',url:"../../assets/pictures/39.jpg"},{cl:'card',url:"../../assets/pictures/40.jpg"},{cl:'card',url:"../../assets/pictures/41.jpg"},
+  {cl:'card',url:"../../assets/pictures/42.jpg"},{cl:'card',url:"../../assets/pictures/43.jpg"},{cl:'card',url:"../../assets/pictures/44.jpg"},
+  {cl:'card',url:"../../assets/pictures/45.jpg"},{cl:'card',url:"../../assets/pictures/46.jpg"},{cl:'card',url:"../../assets/pictures/47.jpg"},
+  {cl:'card',url:"../../assets/pictures/48.jpg"},{cl:'card',url:"../../assets/pictures/49.jpg"},{cl:'card',url:"../../assets/pictures/50.jpg"},
+  {cl:'card',url:"../../assets/pictures/51.jpg"}]
 
-  images: Image[] = [
-    new Image(
-      1,
-      { // modal
-        img: '../../assets/pictures/1.jpg',
-        extUrl: 'http://www.google.com',
-        description: 'Max'
-      }
-    ),
-    new Image(
-      2,
-      { // modal
-        img: '../../assets/pictures/2.jpg',
-        extUrl: 'http://www.google.com',
-        description: 'Dog'
-      }
-    ),
-    new Image(
-      3,
-      { // modal
-        img:  '../../assets/pictures/3.jpg',
-        description: 'Fox'
-      }
-    ),
-    new Image(
-      4,
-      { // modal
-        img: ' ../../assets/pictures/4.jpg',
-        description: 'Bambi'
-      }
-    ),
-    new Image(
-      5,
-      { // modal
-        img: '../../assets/pictures/5.jpg',
-        description: 'Elephant'
-      }
-    )
-  ];
+  selected:mix[]
+  color:string
+  message:string
+  cardstyle:string
+  show:boolean
+  defaultValue: string = '';
+  
+  comentario:string
+  animales:Array<number>
 
-  customButtonsConfigExtUrlNewTab: ButtonsConfig = {
-    visible: true,
-    strategy: ButtonsStrategy.CUSTOM,
-    buttons: [
-      {
-        className: 'ext-url-image',
-        type: ButtonType.EXTURL,
-        extUrlInNewTab: true // <--- this is the important thing to understand this example
-      },
-      {
-        className: 'close-image',
-        type: ButtonType.CLOSE
-      }
-    ]
-  };
 
-  constructor() {
-    
-   }
-
+ constructor(private http: HttpClient, private _snackBar: MatSnackBar) {}
   ngOnInit() {
+    this.selected=new Array<mix>()
+    this.color='primary'
+    this.message='Enviar'
+    this.show=false
   }
 
+  submit(index) {
+    if(this.images[index].cl =='card'){
+      this.images[index].cl='selected'
+      this.selected.push(this.images[index])
+      this.animales.push(index+1)
+    }else{
+      this.images[index].cl='card'
+      let i =this.selected.findIndex(x=>x.url===this.images[index].url)
+      this.selected.splice(i,1)
+      let j =this.selected.findIndex(x=>x===index+1)
+      this.animales.splice(j,1)
+    }
+    
+  }
+
+async btnClick(){
+  
+  this.comentario = (document.getElementById('datos') as HTMLInputElement).value;
+   await this.post(this.comentario,this.animales)
+   this.color='greenyellow'
+   this.message='¡Enviado!'
+   this.show=true
+   console.log(this.selected.length)
+   
+
+   
+ }
+
+ post(comentario, animales){
+  const req = this.http.post(`${API_URL}/add_comment`, {
+    usuario: 'default',
+    product: [JSON.stringify(animales)],
+    comment : comentario
+    
+  })
+  .subscribe(
+    res => {
+      if (res == "Comentario agregado exitosamente") {
+        this.openSnackBar("Comentario agregado exitosamente", "OK");
+        
+      }
+      else{
+        this.openSnackBar("Ya perdio papi", "Ok");
+      }
+    }
+  )
 }
+
+openSnackBar(message: string, action: string) {
+  this._snackBar.open(message, action, {
+    duration: 2000,
+  });
+}
+
+
+
+ btnAdd(){
+  this.color='primary'
+  this.message='Enviar'
+  this.show=false
+  this.defaultValue=''
+  for(let i =0;i<51;i++){
+    this.images[i].cl='card'
+  }
+}
+
+
+}
+
+interface mix {
+  cl?: string
+  url?: string
+}
+
+

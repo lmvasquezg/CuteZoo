@@ -3,43 +3,25 @@
 <head>
     <meta charset="UTF-8">
 </head>
-
+<h2 align="center" >Conoce a nuestros animales</h2>
+<p align="center" >Seleccione los animales de los cuales desea hacer un comentario, posteriormente, <br>cuentenos su famosa opinion que no nos interesa en absoluto :)</p>
+<textarea mat-input placeholder="Escriba aqui su comentario" class="form-control" id="datos" rows="3" maxlength="150"[(ngModel)]="defaultValue"></textarea>
+<mat-error align="center"*ngIf="(this.selected.length==0)&&(defaultValue!='')">
+        No ha seleccionado ningun animal, podria dejar de ser tan estupido y hacerlo? Gracias .l.
+</mat-error>
+<div class="wrapper"*ngIf="(this.selected.length!=0) &&(defaultValue!='')">
+<button class ="but"align="center" mat-raised-button  [color]="[color]" style="width: min-content;" (click)="btnClick()">{{message}}</button>
+<button class="but" align="center" mat-raised-button color="primary" style="width: min-content; display: inline-block; margin-left: 10px; ;" (click)="btnAdd()" *ngIf="show">Añadir otro comentario</button>
+</div>
 <body>
-    <h1 class="title">Haga click en el animal que desea ver</h1>
     <div class="gallery">
-        <div class="card">
-            <img src="../../assets/pictures/1.jpg">
-            <h4>Max</h4>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
-            <a href="../comment/">Comentar</a>
-        </div>
-        <div class="card">
-            <img src="../../assets/pictures/2.jpg">
-            <h4>Dog</h4>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
-            <a href="../comment/">Comentar</a>
-        </div>
-        <div class="card">
-            <img src="../../assets/pictures/3.jpg">
-            <h4>Fox</h4>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
-            <a href="../comment/">Comentar</a>
-        </div>
-        <div class="card">
-            <img src="../../assets/pictures/4.jpg">
-            <h4>Bambi</h4>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
-            <a href="../comment/">Comentar</a>
-        </div>
-        <div class="card">
-            <img src="../../assets/pictures/5.jpg">
-            <h4>Elephant</h4>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
-            <a href="../comment/">Comentar</a>
-        </div>
+        
+           <div *ngFor="let image of images;let i = index" [ngClass]="[image.cl]" (click)="submit(i);" >
+              <img [src]="[image.url] ">
+           </div>
     </div>
-
-
 </body>
+
+
 
 </html>
