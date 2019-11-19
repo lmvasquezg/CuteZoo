@@ -10,6 +10,8 @@ from bson import json_util
 
 import datetime
 
+import re
+
 # Add expected arguments
 parser = reqparse.RequestParser()
 parser.add_argument('usuario')
@@ -28,10 +30,13 @@ class AddComment(Resource):
        
         args = parser.parse_args(strict=True) # Parse the given arguments
         # Create a dicttionary containing the info given in the arguments
+        
+        products = args['product'][1:-1].split(',')
+
         new_user = {
 
                     "usuario":args["usuario"],
-                    "product":args["product"],
+                    "product":products,
                     "comment":args["comment"],
 
                 }
