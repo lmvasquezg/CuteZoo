@@ -135,7 +135,7 @@ export class SignUpGoogleComponent implements OnInit {
           window.open('/home', '_self', '', false);
         }
         else{
-          this.openSnackBar("Ya existe un usuario asosiado a esta cuenta de Google", "Ok");
+          this.openSnackBar("Ya existe un usuario asociado a esta cuenta de Google", "Ok");
         }
       }
     )

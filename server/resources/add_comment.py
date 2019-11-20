@@ -14,7 +14,7 @@ import re
 
 # Add expected arguments
 parser = reqparse.RequestParser()
-parser.add_argument('usuario')
+#parser.add_argument('usuario')
 parser.add_argument('product')
 parser.add_argument('comment')
 
@@ -35,7 +35,7 @@ class AddComment(Resource):
 
         new_user = {
 
-                    "usuario":args["usuario"],
+                    #"usuario":args["usuario"],
                     "product":products,
                     "comment":args["comment"],
 

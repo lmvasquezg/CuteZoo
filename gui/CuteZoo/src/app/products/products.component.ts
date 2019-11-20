@@ -88,7 +88,7 @@ async btnClick(){
  post(comentario, animales: Array<Number>){
   
   const req = this.http.post(`${API_URL}/add_comment`, {
-    usuario: this.message,
+    //usuario: this.message,
     product: [JSON.stringify(animales)],
     comment : comentario
     

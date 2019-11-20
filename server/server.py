@@ -10,10 +10,19 @@ from resources.add_user import AddUser
 from resources.get_password import GetPassword
 from resources.add_comment import AddComment
 #from resources.get_search import GetSearch
-
+header_text = '''
+    <html>\n<head> <title>EB Flask Test</title> </head>\n<body>'''
+instructions = '''
+    <p><em>Hint</em>: This is a RESTful web service! Append a username
+    to the URL (for example: <code>/Thelonious</code>) to say hello to
+    someone specific.</p>\n'''
+home_link = '<p><a href="/">Back</a></p>\n'
+footer_text = '</body>\n</html>'
 print('Ejecutando servidor')
 # Create the app and define it as a rest api.
 app = Flask(__name__)
+app.add_url_rule('/', 'index', (lambda: header_text +
+    instructions + footer_text))
 api = Api(app)
 CORS(app)  # Allow all domains to access the server
 
