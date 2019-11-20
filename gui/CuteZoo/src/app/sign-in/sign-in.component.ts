@@ -81,7 +81,7 @@ export class SignInComponent implements OnInit {
         if (res != "Usuario no existe") {
           if (password == res) {
             this.username=username
-            let url = '/products/'+this.username
+            let url = '/products'//+this.username
             window.open(url, '_self', '', false);
             
           }
@@ -101,7 +101,7 @@ export class SignInComponent implements OnInit {
       async res => {
         if (res != "Usuario no existe") {
           this.username=username
-          let url = '/products/'+this.username
+          let url = '/products'//+this.username
           window.open(url, '_self', '', false);
           
           
