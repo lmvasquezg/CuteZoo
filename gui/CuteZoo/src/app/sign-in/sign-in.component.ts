@@ -1,6 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-
-import { GoogleSignInSuccess } from 'angular-google-signin';
+import { Component, OnInit } from '@angular/core';
 
 import { FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -9,29 +7,26 @@ import { HttpClient } from '@angular/common/http';
 
 import { API_URL } from '../env';
 
+import { AuthService } from 'angularx-social-login';
+import { SocialUser } from 'angularx-social-login';
+import { GoogleLoginProvider } from 'angularx-social-login';
 
-
-import { UserService } from '../user.service';
-
-import { MessageService } from "../message.service";
 
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.css'] 
 })
-export class SignInComponent implements OnInit,OnDestroy {
-  ngOnDestroy(): void {
-    this.data.user = this.username; 
-  }
+export class SignInComponent implements OnInit {
   
-  user: string;
-  message:string
+  user: SocialUser;
 
-  constructor(private http: HttpClient, private _snackBar: MatSnackBar,  public data:MessageService) { }
+  constructor(private http: HttpClient, private _snackBar: MatSnackBar, private authService: AuthService) { }
 
   ngOnInit() {
-    
+    this.authService.authState.subscribe((user) => {
+      this.user = user;
+    });
   }
 
   user_control = new FormControl('', [Validators.required]);
@@ -39,28 +34,23 @@ export class SignInComponent implements OnInit,OnDestroy {
 
   username = '';
   private password = '';
-  private googleUser: gapi.auth2.GoogleUser;
 
-
-  private myClientId: string = '543474456477-h48cgal3hvkchoe1449hadshgijvtjkv.apps.googleusercontent.com';
-
-  onGoogleSignInSuccess(event: GoogleSignInSuccess) {
-    let googleUser: gapi.auth2.GoogleUser = event.googleUser;
-    let id: string = googleUser.getId();
-    let profile: gapi.auth2.BasicProfile = googleUser.getBasicProfile();
-
-    this.username = profile.getEmail();
-
-    this.googleUser = googleUser;
-
+  async signInWithGoogle(): Promise<void> {
+    await this.authService.signIn(GoogleLoginProvider.PROVIDER_ID)
+    .then(x => 
+      this.username = this.user['email']
+    );
     this.checkUser('google', this.username, '');
+  }
+
+  signOut(): void {
+    this.authService.signOut();
   }
 
   async checkUser(type: string, username: string, password: string) {
     if (type == 'google') {
       await this.getUserGoogle(username);
 
-      this.googleUser.disconnect();
     }
     else if (type == 'regular') {
       await this.getUser(username, password);

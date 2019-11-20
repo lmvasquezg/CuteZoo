@@ -2,7 +2,6 @@ import { Component, OnInit, TemplateRef, Inject, Input } from '@angular/core';
 import {API_URL} from '../env'
 import { HttpClient } from '@angular/common/http';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import { MessageService } from "../message.service";
 import { ActivatedRoute } from '@angular/router';
 import { AngularWaitBarrier } from 'blocking-proxy/built/lib/angular_wait_barrier';
 

@@ -30,10 +30,6 @@
                 <mat-error *ngIf="address_control.invalid">{{getErrorMessage("address")}}</mat-error>
             </mat-form-field>
             
-            <!-- <mat-form-field>
-                <input matInput id="email" value={{email}} readonly>
-            </mat-form-field> -->
-            
             <mat-form-field>
                 <mat-label>Género</mat-label>
                 <mat-select [formControl]="gender_control" [(value)]=gender required>
@@ -45,33 +41,14 @@
                 <mat-error *ngIf="gender_control.invalid">{{getErrorMessage("gender")}}</mat-error>
             </mat-form-field>
             
-            <!-- <mat-form-field>
-                <input matInput id="username" placeholder="Usuario" [formControl]="user_control" required>
-                <mat-error *ngIf="user_control">{{getErrorMessage("user")}}</mat-error>
-            </mat-form-field>
-            
-            <mat-form-field>
-                <input matInput id="password" placeholder="Contraseña" type="password" [formControl]="psw_control" required>
-                <mat-error *ngIf="psw_control.invalid">{{getErrorMessage("password")}}</mat-error>
-            </mat-form-field> -->
-            
-            <google-signin
-              [clientId]="myClientId"
-              [width]="myWidth"
-              [theme]="myTheme"
-              [scope]="myScope"
-              [longTitle]="myLongTitle"
-              (googleSignInSuccess)="onGoogleSignInSuccess($event)">
-            </google-signin>
+            <button mat-raised-button style="background-color: #DD4B39; color: white;" (click)="signInWithGoogle()">{{message}}</button>
 
             <br>
 
             <button mat-raised-button color="primary" style="width: min-content;" (click)="createUser();">Crear Cuenta</button>
             
         </div>
-        
-        <!-- <button mat-raised-button color="primary" style="width: min-content;" (click)="cerrar();">Cerrar Sesión</button> -->
-        
+                
     </form>
     
     

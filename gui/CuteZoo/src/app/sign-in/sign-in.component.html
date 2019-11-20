@@ -8,14 +8,7 @@
             </div> 
         </div>
 
-        <google-signin
-            [clientId]="myClientId"
-            [width]="myWidth"
-            [theme]="myTheme"
-            [scope]="myScope"
-            [longTitle]=true
-            (googleSignInSuccess)="onGoogleSignInSuccess($event)">
-        </google-signin>
+        <button mat-raised-button style="background-color: #DD4B39; color: white;" (click)="signInWithGoogle()">Iniciar Sesión con Google</button>
 
         <br>
 

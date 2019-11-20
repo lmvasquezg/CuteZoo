@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 
-import {GoogleSignInSuccess} from 'angular-google-signin';
-
 import {FormControl, Validators} from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
 import { HttpClient } from '@angular/common/http';
 
 import { API_URL } from '../env';
-import { USER } from '../user';
+
+import { AuthService } from 'angularx-social-login';
+import { SocialUser } from 'angularx-social-login';
+import { GoogleLoginProvider } from 'angularx-social-login';
 
 @Component({
   selector: 'app-sign-up-google',
@@ -17,9 +18,15 @@ import { USER } from '../user';
 })
 export class SignUpGoogleComponent implements OnInit {
 
-  constructor(private http: HttpClient, private _snackBar: MatSnackBar) { }
+  user: SocialUser;
+  message = 'Iniciar Sesión con Google';
+
+  constructor(private http: HttpClient, private _snackBar: MatSnackBar, private authService: AuthService) { }
   
   ngOnInit() {
+    this.authService.authState.subscribe((user) => {
+      this.user = user;
+    });
   }
 
   genderOptions = [
@@ -33,42 +40,34 @@ export class SignUpGoogleComponent implements OnInit {
   country_control = new FormControl('', [Validators.required]);
   address_control = new FormControl('', [Validators.required]);
   gender_control = new FormControl('', [Validators.required]);
-  // user_control = new FormControl('', [Validators.required]);
-  // psw_control = new FormControl('', [Validators.required]);
   
-  private name;
-  private age;
-  private city;
-  private country;
-  private address;
-  private email;
-  private gender;
-  private username;
-  private password;
+  name;
+  age;
+  city;
+  country;
+  address;
+  email;
+  gender;
+  username;
+  password;
 
-  private googleUser: gapi.auth2.GoogleUser;
+  signedIn = false;
 
-  private signedIn = false;
+  async signInWithGoogle(): Promise<void> {
+    await this.authService.signIn(GoogleLoginProvider.PROVIDER_ID)
+    .then(x => 
+      this.name = this.user['name']
+    );
+    this.email = this.user['email'];
 
-  private myClientId: string = '543474456477-h48cgal3hvkchoe1449hadshgijvtjkv.apps.googleusercontent.com';
- 
-  onGoogleSignInSuccess(event: GoogleSignInSuccess) {
-    let googleUser: gapi.auth2.GoogleUser = event.googleUser;
-    let id: string = googleUser.getId();
-    let profile: gapi.auth2.BasicProfile = googleUser.getBasicProfile();
-    
-    this.name = profile.getName();
-    this.email = profile.getEmail();
+    if (this.user) {
+      this.signedIn = true;
+      this.message = "Sesión iniciada";
+    }
+  }
 
-    this.signedIn = true;
-    this.googleUser = googleUser;
-
-    // console.log('ID: ' +
-    //   profile
-    //     .getId()); // Do not send to your backend! Use an ID token instead.
-    // console.log('Name: ' + profile.getName());
-    // console.log(profile.getEmail());
-    // console.log(profile.getImageUrl())
+  signOut(): void {
+    this.authService.signOut();
   }
 
   getErrorMessage(type: string) {
@@ -90,12 +89,6 @@ export class SignUpGoogleComponent implements OnInit {
       case "gender":
         return this.gender_control.hasError('required') ? 'Por favor seleccione una opción' : '';
         break;
-      // case "user":
-      //   return this.user_control.hasError('required') ? 'Por favor seleccione un nombre de usuario' : '';
-      //   break;
-      // case "password":
-      //   return this.psw_control.hasError('required') ? 'Por favor ingrese una contraseña' : '';
-      //   break;
     }
   }
 
@@ -117,18 +110,6 @@ export class SignUpGoogleComponent implements OnInit {
       this.city = (document.getElementById('city') as HTMLInputElement).value;
       this.country = (document.getElementById('country') as HTMLInputElement).value;
       this.address = (document.getElementById('address') as HTMLInputElement).value;
-      // this.username = (document.getElementById('username') as HTMLInputElement).value;
-      // this.password = (document.getElementById('password') as HTMLInputElement).value;
-  
-      // USER.name = this.name;
-      // USER.age = this.age;
-      // USER.city = this.city;
-      // USER.country = this.country;
-      // USER.address = this.address;
-      // USER.email = this.email;
-      // USER.gender = this.gender;
-      // USER.username = this.email;
-      // USER.password = '';
 
       this.post(this.name, this.age, this.city, this.country, this.address, this.email, this.gender, '', this.email)
     }
@@ -150,7 +131,7 @@ export class SignUpGoogleComponent implements OnInit {
       res => {
         if (res == "Usuario agregado exitosamente") {
           this.openSnackBar("Usuario creado exitosamente", "OK");
-          this.googleUser.disconnect();
+
           window.open('/home', '_self', '', false);
         }
         else{

@@ -24,8 +24,6 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { GoogleSignInComponent } from 'angular-google-signin';
-
 import { HttpClientModule } from '@angular/common/http';
 
 import { HomeComponent } from './home/home.component';
@@ -34,7 +32,20 @@ import { SignUpGoogleComponent } from './sign-up-google/sign-up-google.component
 import { SignInComponent } from './sign-in/sign-in.component';
 import { ProductsComponent } from './products/products.component';
 
-import {MessageService} from './message.service'
+import { SocialLoginModule } from 'angularx-social-login';
+import { AuthServiceConfig, GoogleLoginProvider } from 'angularx-social-login';
+
+
+const config = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider('543474456477-h48cgal3hvkchoe1449hadshgijvtjkv.apps.googleusercontent.com')
+  }
+]);
+
+export function provideConfig() {
+  return config;
+}
 
 
 @NgModule({
@@ -42,7 +53,6 @@ import {MessageService} from './message.service'
     AppComponent,
     HomeComponent,
     SignUpComponent,
-    GoogleSignInComponent,
     SignUpGoogleComponent,
     SignInComponent,
     ProductsComponent
@@ -65,9 +75,15 @@ import {MessageService} from './message.service'
     MatMenuModule,
     HttpClientModule,
     SlideshowModule,
+    SocialLoginModule,
     GalleryModule.forRoot()
   ],
-    providers: [],
+    providers: [
+      {
+        provide: AuthServiceConfig,
+        useFactory: provideConfig
+      }
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
