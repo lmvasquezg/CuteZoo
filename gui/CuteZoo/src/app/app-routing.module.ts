@@ -32,7 +32,7 @@ const routes: Routes = [
     component: SignInComponent
   },
   {
-    path: 'products',
+    path: 'products/:id',
     component: ProductsComponent
   },
   

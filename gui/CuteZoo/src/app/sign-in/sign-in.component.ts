@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { GoogleSignInSuccess } from 'angular-google-signin';
 
@@ -9,20 +9,29 @@ import { HttpClient } from '@angular/common/http';
 
 import { API_URL } from '../env';
 
+
+
 import { UserService } from '../user.service';
+
+import { MessageService } from "../message.service";
 
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.css']
+  styleUrls: ['./sign-in.component.css'] 
 })
-export class SignInComponent implements OnInit {
+export class SignInComponent implements OnInit,OnDestroy {
+  ngOnDestroy(): void {
+    this.data.user = this.username; 
+  }
   
   user: string;
+  message:string
 
-  constructor(private http: HttpClient, private _snackBar: MatSnackBar, private userService: UserService) { }
+  constructor(private http: HttpClient, private _snackBar: MatSnackBar,  public data:MessageService) { }
 
   ngOnInit() {
+    
   }
 
   user_control = new FormControl('', [Validators.required]);
@@ -81,8 +90,10 @@ export class SignInComponent implements OnInit {
       async res => {
         if (res != "Usuario no existe") {
           if (password == res) {
-            await this.userService.setUsername("HOLLAAAAA");
-            window.open('/products', '_self', '', false);
+            this.username=username
+            let url = '/products/'+this.username
+            window.open(url, '_self', '', false);
+            
           }
           else {
             this.openSnackBar("El usuario o contraseña son incorrectos", "Ok");
@@ -99,9 +110,11 @@ export class SignInComponent implements OnInit {
     const req = this.http.get(`${API_URL}/password/${username}`).subscribe(
       async res => {
         if (res != "Usuario no existe") {
-          await this.userService.setUsername("HOLLAAAAA");
-          this.userService.currentUsername.subscribe(usr => console.log(usr));
-          window.open('/products', '_self', '', false);
+          this.username=username
+          let url = '/products/'+this.username
+          window.open(url, '_self', '', false);
+          
+          
         }
         else {
           this.openSnackBar("El usuario o contraseña son incorrectos", "Ok");
@@ -116,4 +129,6 @@ export class SignInComponent implements OnInit {
       duration: 2000,
     });
   }
+
+  
 }

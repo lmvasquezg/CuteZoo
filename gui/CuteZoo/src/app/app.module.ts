@@ -34,6 +34,7 @@ import { SignUpGoogleComponent } from './sign-up-google/sign-up-google.component
 import { SignInComponent } from './sign-in/sign-in.component';
 import { ProductsComponent } from './products/products.component';
 
+import {MessageService} from './message.service'
 
 
 @NgModule({

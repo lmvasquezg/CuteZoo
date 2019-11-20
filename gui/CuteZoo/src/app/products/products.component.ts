@@ -1,7 +1,9 @@
-import { Component, OnInit, TemplateRef, Inject } from '@angular/core';
+import { Component, OnInit, TemplateRef, Inject, Input } from '@angular/core';
 import {API_URL} from '../env'
 import { HttpClient } from '@angular/common/http';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { MessageService } from "../message.service";
+import { ActivatedRoute } from '@angular/router';
 import { AngularWaitBarrier } from 'blocking-proxy/built/lib/angular_wait_barrier';
 
 @Component({
@@ -10,7 +12,7 @@ import { AngularWaitBarrier } from 'blocking-proxy/built/lib/angular_wait_barrie
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
-
+  
   images:mix[] =[ {cl:'card',url:"../../assets/pictures/1.jpg"},{cl:'card',url:"../../assets/pictures/2.jpg"},
   {cl:'card',url:"../../assets/pictures/3.jpg"},{cl:'card',url:"../../assets/pictures/4.jpg"},{cl:'card',url:"../../assets/pictures/5.jpg"},
   {cl:'card',url:"../../assets/pictures/6.jpg"},{cl:'card',url:"../../assets/pictures/7.jpg"},{cl:'card',url:"../../assets/pictures/8.jpg"},
@@ -36,19 +38,23 @@ export class ProductsComponent implements OnInit {
   cardstyle:string
   show:boolean
   defaultValue: string = '';
+ message1:string
   
   comentario:string
   animales:Array<number>
 
 
- constructor(private http: HttpClient, private _snackBar: MatSnackBar) {}
+ constructor(private http: HttpClient, private _snackBar: MatSnackBar, private route:ActivatedRoute) {
+ }
   ngOnInit() {
     this.selected=new Array<mix>()
     this.color='primary'
-    this.message='Enviar'
+    this.message1='Enviar'
     this.show=false
     this.animales = new Array();
-
+    
+    this.message = this.route.snapshot.params.id;
+  
   }
 
   submit(index) {
@@ -67,11 +73,11 @@ export class ProductsComponent implements OnInit {
 
 async btnClick(){
   if (this.animales.length != 0) {
-    if (this.message != '¡Enviado!') {
+    if (this.message1 != '¡Enviado!') {
       this.comentario = (document.getElementById('datos') as HTMLInputElement).value;
       await this.post(this.comentario,this.animales)
       this.color='greenyellow'
-      this.message='¡Enviado!'
+      this.message1='¡Enviado!'
       this.show=true
     }
   }
@@ -81,8 +87,9 @@ async btnClick(){
  }
 
  post(comentario, animales: Array<Number>){
+  
   const req = this.http.post(`${API_URL}/add_comment`, {
-    usuario: 'default',
+    usuario: this.message,
     product: [JSON.stringify(animales)],
     comment : comentario
     
@@ -100,8 +107,8 @@ async btnClick(){
   )
 }
 
-openSnackBar(message: string, action: string) {
-  this._snackBar.open(message, action, {
+openSnackBar(mensaje: string, action: string) {
+  this._snackBar.open(mensaje, action, {
     duration: 2000,
   });
 }
@@ -110,7 +117,7 @@ openSnackBar(message: string, action: string) {
 
  btnAdd(){
   this.color='primary'
-  this.message='Enviar'
+  this.message1='Enviar'
   this.show=false
   this.defaultValue=''
   this.animales = new Array();
