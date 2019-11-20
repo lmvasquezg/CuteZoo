@@ -13,6 +13,10 @@
     </mat-menu>
   </div>
 
+  <div *ngIf="this.router.url == '/products'">
+    <button mat-raised-button routerLink="/home">Cerrar Sesión</button>
+  </div>
+
   <div *ngIf="this.router.url != '/home'">
     {{username}}
   </div>

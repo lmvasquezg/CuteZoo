@@ -66,12 +66,18 @@ export class ProductsComponent implements OnInit {
   }
 
 async btnClick(){
-  
-  this.comentario = (document.getElementById('datos') as HTMLInputElement).value;
-   await this.post(this.comentario,this.animales)
-   this.color='greenyellow'
-   this.message='¡Enviado!'
-   this.show=true
+  if (this.animales.length != 0) {
+    if (this.message != '¡Enviado!') {
+      this.comentario = (document.getElementById('datos') as HTMLInputElement).value;
+      await this.post(this.comentario,this.animales)
+      this.color='greenyellow'
+      this.message='¡Enviado!'
+      this.show=true
+    }
+  }
+  else {
+    this.openSnackBar("Por favor seleccione los animales a los que desea agregar el comentario", "Ok");
+  }
  }
 
  post(comentario, animales: Array<Number>){
@@ -88,7 +94,7 @@ async btnClick(){
         
       }
       else{
-        this.openSnackBar("Ya perdio papi", "Ok");
+        this.openSnackBar("No se ha podido agregar el comentario", "Ok");
       }
     }
   )
